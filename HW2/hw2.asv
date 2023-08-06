@@ -1,0 +1,28 @@
+%% a
+c = 0;
+SX = 0;
+SR = 0;
+SI = 0;
+for j =1:10000
+    S = 0;
+  T = -1000*log(rand(1));
+    while S < T
+    X = -1 * log(rand(1));
+    c = c + 1;
+    SX = SX + X;
+   S = S + X;
+    end
+    R = S- T;
+    I = X;
+    SR = SR + R;
+    SI = SI + I;
+end
+
+e_x = SX/c
+e_I = SI/10000
+e_R = SR/10000
+%% b
+e_x = [];
+e_I = [];
+e_R = [];
+for u = 0:5:0.
