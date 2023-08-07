@@ -1,0 +1,300 @@
+%% MMS simulation
+clc, clear all;
+S = 10;
+C = repelem(0, S);
+NStop = 10000000;
+A = 0;
+K = 0;
+AB = 0;
+landa = 4;
+ta = 2.4;
+BT = 0;
+P_0 = 0;
+P = repelem(0, 8);
+e_W = 0;
+for d = 1:NStop
+    IA = -(1/landa) * log(rand(1));
+    X = - ta *log(rand(1));
+    A = A + IA;
+    J = 1;
+    while A <C(J)
+        J = J + 1;
+        if J == S + 1
+        K = K + 1;
+        break;
+        end
+    end
+    if J == S + 1
+       [M,I] = min(C);
+       C(I) = C(I)+ X;
+       dw =  M - A;
+       e_W = e_W + dw;
+       if dw >0
+           P_0 = P_0 + 1;
+       end
+       if dw > ta
+           P(1) = P(1) + 1;
+       end
+       if dw > 2* ta
+           P(2) = P(2) + 1;
+       end
+       if dw > 3 * ta
+           P(3) = P(3) + 1;
+       end
+       if dw > 4 * ta
+           P(4) = P(4) + 1;
+       end
+       if dw > 5 * ta
+       P(5) = P(5) + 1;
+       end
+       if dw > 6 * ta
+           P(6) = P(6) + 1;
+       end
+       if dw > 7 * ta
+           P(7) = P(7) + 1;
+       end
+       if dw > 8 * ta
+           P(8) = P(8) + 1;
+       end
+    
+    else
+    C(J) = A + X;
+    end
+    BT = BT + X;
+  
+end
+FT = sum(C);
+e_W = e_W/(NStop * ta)
+P_0 = P_0/NStop
+rho = BT/FT
+P = P /NStop
+%% MMS theory
+a = 9.6;
+S = 10;
+rho = a/S;
+m = 2.4;
+landa = 4;
+B =  erlangB(9.6, 10);
+C = B/(1- 0.96 * (1- B))
+e_w_theory = (C/S) /(1-rho)
+i = 0;
+P_0 = 1;
+while i <= 8
+P = C * exp(-(1-rho)*i*S)
+i = i + 1;
+end
+%% MDS simulation
+
+clc, clear all;
+S = 10;
+C = repelem(0, S);
+NStop = 10000000;
+A = 0;
+K = 0;
+AB = 0;
+landa = 4;
+ta = 2.4;
+BT = 0;
+P_0 = 0;
+P = repelem(0, 8);
+e_W = 0;
+for d = 1:NStop
+    IA = -(1/landa) * log(rand(1));
+    X =  ta;
+    A = A + IA;
+    J = 1;
+    while A <C(J)
+        J = J + 1;
+        if J == S + 1
+        K = K + 1;
+        break;
+        end
+    end
+    if J == S + 1
+       [M,I] = min(C);
+       C(I) = C(I)+ X;
+       dw =  M - A;
+       e_W = e_W + dw;
+       if dw >0
+           P_0 = P_0 + 1;
+       end
+       if dw > ta
+           P(1) = P(1) + 1;
+       end
+       if dw > 2* ta
+           P(2) = P(2) + 1;
+       end
+       if dw > 3 * ta
+           P(3) = P(3) + 1;
+       end
+       if dw > 4 * ta
+           P(4) = P(4) + 1;
+       end
+       if dw > 5 * ta
+       P(5) = P(5) + 1;
+       end
+       if dw > 6 * ta
+           P(6) = P(6) + 1;
+       end
+       if dw > 7 * ta
+           P(7) = P(7) + 1;
+       end
+       if dw > 8 * ta
+           P(8) = P(8) + 1;
+       end
+    
+    else
+    C(J) = A + X;
+    end
+    BT = BT + X;
+  
+end
+FT = sum(C);
+e_W = e_W/(NStop * ta)
+P_0 = P_0/NStop
+rho = BT/FT
+P = P /NStop
+%% DMS simulation
+
+clc, clear all;
+S = 10;
+C = repelem(0, S);
+NStop = 10000000;
+A = 0;
+K = 0;
+AB = 0;
+landa = 4.2;
+ta = 2.4;
+BT = 0;
+P_0 = 0;
+P = repelem(0, 8);
+e_W = 0;
+for d = 1:NStop
+    IA = 1/landa;
+    X =  - ta *log(rand(1));
+    A = A + IA;
+    J = 1;
+    while A <C(J)
+        J = J + 1;
+        if J == S + 1
+        K = K + 1;
+        break;
+        end
+    end
+    if J == S + 1
+       [M,I] = min(C);
+       C(I) = C(I)+ X;
+       dw =  M - A;
+       e_W = e_W + dw;
+       if dw >0
+           P_0 = P_0 + 1;
+       end
+       if dw > ta
+           P(1) = P(1) + 1;
+       end
+       if dw > 2* ta
+           P(2) = P(2) + 1;
+       end
+       if dw > 3 * ta
+           P(3) = P(3) + 1;
+       end
+       if dw > 4 * ta
+           P(4) = P(4) + 1;
+       end
+       if dw > 5 * ta
+       P(5) = P(5) + 1;
+       end
+       if dw > 6 * ta
+           P(6) = P(6) + 1;
+       end
+       if dw > 7 * ta
+           P(7) = P(7) + 1;
+       end
+       if dw > 8 * ta
+           P(8) = P(8) + 1;
+       end
+    
+    else
+    C(J) = A + X;
+    end
+    BT = BT + X;
+  
+end
+FT = sum(C);
+e_W = e_W/(NStop * ta)
+P_0 = P_0/NStop
+P = P /NStop
+rho = BT/FT
+
+%% DDS simulation
+
+clc, clear all;
+S = 10;
+C = repelem(0, S);
+NStop = 10000000;
+A = 0;
+K = 0;
+AB = 0;
+landa = 4.2;
+ta = 2.4;
+BT = 0;
+P_0 = 0;
+P = repelem(0, 8);
+e_W = 0;
+for d = 1:NStop
+    IA = 1/landa;
+    X =  ta ;
+    A = A + IA;
+    J = 1;
+    while A <C(J)
+        J = J + 1;
+        if J == S + 1
+        K = K + 1;
+        break;
+        end
+    end
+    if J == S + 1
+       [M,I] = min(C);
+       C(I) = C(I)+ X;
+       dw =  M - A;
+       e_W = e_W + dw;
+       if dw >0
+           P_0 = P_0 + 1;
+       end
+       if dw > ta
+           P(1) = P(1) + 1;
+       end
+       if dw > 2* ta
+           P(2) = P(2) + 1;
+       end
+       if dw > 3 * ta
+           P(3) = P(3) + 1;
+       end
+       if dw > 4 * ta
+           P(4) = P(4) + 1;
+       end
+       if dw > 5 * ta
+       P(5) = P(5) + 1;
+       end
+       if dw > 6 * ta
+           P(6) = P(6) + 1;
+       end
+       if dw > 7 * ta
+           P(7) = P(7) + 1;
+       end
+       if dw > 8 * ta
+           P(8) = P(8) + 1;
+       end
+    
+    else
+    C(J) = A + X;
+    end
+    BT = BT + X;
+  
+end
+FT = sum(C);
+e_W = e_W/(NStop * ta)
+P_0 = P_0/NStop
+P = P /NStop
+rho = BT/FT
+
